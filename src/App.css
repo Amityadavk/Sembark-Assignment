@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,54 @@
   to {
     transform: rotate(360deg);
   }
+} */
+*{
+  margin: 0;
+}
+.total-card{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.card{
+  /* border: 2px solid red; */
+  
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 6px;
+
+  margin: 5px;
+  /* text-align: center; */
+  padding-bottom: 5px;
+}
+.card > img{
+  width: 300px;
+  height: 200px;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+}
+.description{
+    max-width: 300px;
+    text-align: center;
+}
+
+.card-button{
+  text-align: center;
+}
+.card-button > button{
+  color: white;
+  
+  background-color: blue;
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+  width: 200px;
+  margin-top: 10px;
+}
+.price-rating{
+  display: flex;
+  justify-content: space-evenly;
+}
+.card-details{
+  display: flex;
+  justify-content: space-around;
 }
