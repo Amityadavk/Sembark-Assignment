@@ -1,20 +1,20 @@
 // import logo from './logo.svg';
 
-import './App.css';
-import Products from "./Components/Product"
+import "./App.css";
+
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Navbar from "./Components/Navbar";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
-
-  
-
   return (
-    <div className="App">
-
-      <Products/>
-      {/* title={Products.title} price={"efy"} rating={"ygewryr"} brand={"uefuew"} description={"hdgew"}/> */}
-       
-      
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
+    </>
   );
 }
 
