@@ -40,3 +40,8 @@ function Products({ image, category, price, rating, brand, description }) {
 }
 
 export default Products;
+
+
+
+
+// Amit Yadav
