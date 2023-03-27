@@ -11,8 +11,7 @@ function Home() {
     const [searchinput, setSearchInput] = useState("");
     const [lastSearch, setLastSearch] = useState("")
     const [loader, setLoader] = useState(false);
-    const [cartitem, setCartItem] = useState(50);
-
+    const [cartitem, setCartItem] = useState(5);
 
     function search(value) {
         setLoader(true)
@@ -60,7 +59,6 @@ function Home() {
             });
     }, []);
     return <>
-
         <Navbar
             pressEnter={pressEnter}
             searchinput={searchinput}
@@ -78,6 +76,7 @@ function Home() {
                     rating={item.rating}
                     brand={item.brand}
                     description={item.description}
+                    id={item.id}
                 />
             ))}
         </div>}

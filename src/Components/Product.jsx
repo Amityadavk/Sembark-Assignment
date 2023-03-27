@@ -1,4 +1,22 @@
-function Products({ image, category, price, rating, brand, description }) {
+import { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import { Cart } from "../context/Context";
+
+function Products({ image, category, price, rating, brand, description, id }) {
+    const cartValue = useContext(Cart)
+    const addToCart = () => {
+        cartValue.dispatch({
+            type: "add to cart",
+            item: {
+                id: id,
+                brand: brand,
+                category: category,
+                price: price,
+            }
+        })
+    }
+    console.log()
+
 
 
     return <div>
@@ -26,8 +44,10 @@ function Products({ image, category, price, rating, brand, description }) {
                 <p>{description.length > 55 ? description.slice(0, 55) + "..." : description}</p>
             </div>
 
-            <div className="card-button">
-                <button>Add to Cart</button>
+            <div className="card-button-div">
+                {/* <NavLink to="/cart"> */}
+                <button onClick={addToCart} className="card-button">Add to Cart</button>
+                {/* </NavLink> */}
             </div>
 
 

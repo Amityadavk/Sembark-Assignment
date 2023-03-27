@@ -7,7 +7,7 @@ function Login() {
             <div class="login-main">
                 <div class="login">
                     <form className="login-form">
-                       <h1 className="login-heading">Login</h1>
+                        <h1 className="login-heading">Login</h1>
                         <input type="email" name="email" placeholder="Email" required="" />
                         <input
                             type="password"
@@ -15,7 +15,7 @@ function Login() {
                             placeholder="Password"
                             required=""
                         />
-                       <Link className="login-navlink" to="/home"> < button className="login-button" type="button">Login</button></Link>
+                        <Link className="login-navlink" to="/home"> < button className="login-button" type="button">Login</button></Link>
                     </form>
                 </div>
             </div>

@@ -49,6 +49,7 @@ body {
   position: fixed;
   width: 100%;
   
+  
 }
 .navbar {
   display: flex;
@@ -56,6 +57,7 @@ body {
   justify-content: space-between;
   /* max-width: 1300px; */
   margin: 0 40px;
+
  
   /* height: 80px; */
   /*  */
@@ -171,10 +173,10 @@ body {
   margin: 10px auto;
 }
 
-.card-button {
+.card-button-div {
   text-align: center;
 }
-.card-button > button {
+.card-button{
   color: white;
 
   background-color: #609EA2;

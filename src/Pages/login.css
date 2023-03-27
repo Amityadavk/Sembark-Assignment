@@ -14,6 +14,7 @@
   /* background-color: rgb(253, 248, 248); */
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
+  margin-top: 110px;
 }
 .login {
   position: relative;
@@ -49,7 +50,7 @@
   justify-content: center;
   display: block;
   color: #fff;
-  background: #573b8a;
+  background: #4b4b4b;
   font-size: 1em;
   font-weight: bold;
   margin-top: 20px;
@@ -60,7 +61,7 @@
   cursor: pointer;
 }
 .login-button:hover {
-  background: #d97171;
+  background: #e84d4d;
 }
 .login-navlink{
     color: #fff;
