@@ -44,6 +44,7 @@ const Basket = () => {
       type: "remove from cart",
       payload: {
         id: id,
+        // price:price*qty
         // title:title,
         // category:category,
         // price:price,
@@ -102,7 +103,9 @@ const Basket = () => {
         <div key={index} className='cart-card' >
           <img style={{ width: "250px", maxHeight: "150px" }} src={item.image} alt="" />
           {/* <p>{item.id}</p> */}
-          <p>{item.title}</p>
+
+<div>
+<p>{item.title}</p>
           {/* <p>{item.category}</p> */}
           <div className='cart-card-qty'>
             <p> Qty-<span>{item.qty}</span></p>
@@ -112,8 +115,13 @@ const Basket = () => {
             </div>
 
           </div>
-          <p>INR {item.price}</p>
+          <p>INR {item.price*item.qty}</p>
           <button onClick={() => removeCartItem(item.id)}>Remove</button>
+
+</div>
+         
+
+
         </div>
       ))}
 

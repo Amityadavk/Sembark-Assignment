@@ -42,21 +42,31 @@ const cartReducer = (state, action) => {
 
                 if (item.id === action.payload.id) {
                     let increQty = item.qty + 1;
-                    return { ...item, qty: increQty }
-                } else {
+                    // if(item.id === action.payload.id){
+                        // let newPrice = item.price *item.qty;
+                    //     return {...item, price:newPrice}
+                    // }
+                    return { ...item, qty: increQty  }
+
+                } 
+                
+                else {
                     return item;
                 }
-
+                
             });
-            return { ...state, basket: updatedQty }
+            
+            return { ...state, basket: updatedQty}
 
             case "decrease qty":
                 const updatedDecreaseQty = state.basket.map((item) => {
     
                     if (item.id === action.payload.id) {
+                        const decreQty = item.qty - 1;
                         if(item.qty<=1){
-                            const decreQty = item.qty - 1;
-                            item.qty = 1;
+                            return{...item,qty:1}
+                             
+
                         }
                         return { ...item, qty: decreQty }
                     } else {
