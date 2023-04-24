@@ -43,39 +43,49 @@ const cartReducer = (state, action) => {
                 if (item.id === action.payload.id) {
                     let increQty = item.qty + 1;
                     // if(item.id === action.payload.id){
-                        // let newPrice = item.price *item.qty;
+                    // let newPrice = item.price *item.qty;
                     //     return {...item, price:newPrice}
                     // }
-                    return { ...item, qty: increQty  }
+                    return { ...item, qty: increQty }
 
-                } 
-                
+                }
+
                 else {
                     return item;
                 }
-                
+
             });
-            
-            return { ...state, basket: updatedQty}
+            return { ...state, basket: updatedQty }
 
-            case "decrease qty":
-                const updatedDecreaseQty = state.basket.map((item) => {
-    
-                    if (item.id === action.payload.id) {
-                        const decreQty = item.qty - 1;
-                        if(item.qty<=1){
-                            return{...item,qty:1}
-                             
+        case "decrease qty":
+            const updatedDecreaseQty = state.basket.map((item) => {
 
-                        }
-                        return { ...item, qty: decreQty }
-                    } else {
-                        return item;
+                if (item.id === action.payload.id) {
+                    const decreQty = item.qty - 1;
+                    if (item.qty <= 1) {
+                        return { ...item, qty: 1 }
+
+
                     }
-    
-                });
-                return { ...state, basket: updatedDecreaseQty }
+                    return { ...item, qty: decreQty }
+                } else {
+                    return item;
+                }
 
+            });
+            return { ...state, basket: updatedDecreaseQty }
+
+
+        case "cart total price":
+            const totalPrice = state.basket.reduce((initialVal, item)=>{
+                // let price = item;
+
+                initialVal = initialVal + item.price*item.qty;
+                console.log(initialVal);
+                return initialVal;
+            },0);
+
+            return{ ...state, total_price:totalPrice}
 
         default:
             return state;

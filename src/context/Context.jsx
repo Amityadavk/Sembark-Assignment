@@ -12,13 +12,14 @@ export const Cart = createContext();
 
 const initialState = {
     basket: [],
+    // total_price: 0,
     // cartTotalItem: 0,
-    cardData:[{
-        id: "",
-        title: "",
-        category: "",
-        price: ""
-    }]
+    // cardData:[{
+    //     id: "",
+    //     title: "",
+    //     category: "",
+    //     price: ""
+    // }]
 };
 
 // const basketlength = initialState.basket.length;

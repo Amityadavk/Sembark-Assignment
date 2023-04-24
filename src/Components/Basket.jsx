@@ -16,7 +16,7 @@ const Basket = () => {
 
 
   // state for cart array
-  const [cartArray, setCartArray] = useState([]);
+  // const [cartArray, setCartArray] = useState([]);
 
 
 
@@ -61,26 +61,28 @@ const Basket = () => {
 
   // Increase and Decrease quantity
 
-  function increaseQty(id){
+  function increaseQty(id) {
     addToCartData.dispatch({
       type: "increase qty",
       payload: {
-        id:id,
+        id: id,
       }
     })
   }
 
-  function decreaseQty(id){
+  function decreaseQty(id) {
     addToCartData.dispatch({
       type: "decrease qty",
       payload: {
-        id:id,
-        
+        id: id,
+
       }
     })
   }
 
-
+useEffect(()=>{
+  addToCartData.dispatch({type: "cart total price"})
+},[addToCartData.state.basket])
 
 
 
@@ -99,31 +101,42 @@ const Basket = () => {
         <h5 style={{ width: '80px' }}>Remove</h5>
       </div>
       {addToCartData.state.basket.map((item, index) => (
-      
+
         <div key={index} className='cart-card' >
           <img style={{ width: "250px", maxHeight: "150px" }} src={item.image} alt="" />
           {/* <p>{item.id}</p> */}
 
-<div>
-<p>{item.title}</p>
+          {/* <div> */}
+          <p>{item.title}</p>
           {/* <p>{item.category}</p> */}
           <div className='cart-card-qty'>
             <p> Qty-<span>{item.qty}</span></p>
             <div className='cart-card-qty-btn-div'>
-              <button onClick={()=>decreaseQty(item.id)}>-</button>
-              <button onClick={()=>increaseQty(item.id)}>+</button>
+              <button onClick={() => decreaseQty(item.id)}>-</button>
+              <button onClick={() => increaseQty(item.id)}>+</button>
             </div>
 
           </div>
-          <p>INR {item.price*item.qty}</p>
+          <p>INR {item.price * item.qty}</p>
           <button onClick={() => removeCartItem(item.id)}>Remove</button>
 
-</div>
-         
+          {/* </div> */}
+
 
 
         </div>
+
+
       ))}
+      <div style={{ width: "1030px", display: 'flex', margin: "auto" }}>
+        <div className='order-total'>
+          <h6>Total: INR {addToCartData.state.total_price}</h6>
+          <h6>shipping Fee: Free</h6>
+          <hr />
+          <h2>Order Total: INR {addToCartData.state.total_price}</h2>
+        </div>
+      </div>
+
 
     </>
   )
