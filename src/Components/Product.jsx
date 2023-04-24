@@ -1,40 +1,46 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Cart } from "../context/Context";
+import Home from "../Pages/Home";
 
-function Products({ image, category, price, rating, brand, description, id }) {
+function Products({ image, category, price, rating, title, description, id }) {
     const cartValue = useContext(Cart)
     const addToCart = () => {
         cartValue.dispatch({
             type: "add to cart",
-            item: {
+            payload: {
                 id: id,
-                brand: brand,
+                title: title,
                 category: category,
                 price: price,
+                image: image,
+                qty:1,
             }
         })
+        // cartValue.basketlength()
     }
-    console.log()
+    // console.log(cartValue.state.basket);
+    // console.log()
 
 
 
     return <div>
 
         <div className="card">
+            
             <img src={image} alt="" />
             <div className="card-details">
                 <div>
                     <h5>Category :</h5>
                     <p>Price :</p>
                     <p>Rating :</p>
-                    <p>Brand :</p>
+                    <p>title :</p>
                 </div>
                 <div>
                     <h5>{category}</h5>
                     <p>{price}</p>
                     <p>{rating}</p>
-                    <p>{brand}</p>
+                    <p>{title}</p>
                 </div>
             </div>
 

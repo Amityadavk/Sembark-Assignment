@@ -4,6 +4,9 @@ import Products from "../Components/Product";
 
 
 import Navbar from "../Components/Navbar";
+import { Cart } from "../context/Context";
+import { useContext } from "react";
+
 
 
 function Home() {
@@ -11,16 +14,19 @@ function Home() {
     const [searchinput, setSearchInput] = useState("");
     const [lastSearch, setLastSearch] = useState("")
     const [loader, setLoader] = useState(false);
-    const [cartitem, setCartItem] = useState(5);
+    const [cartItem, setCartItem] = useState(0);
+
+    const cartTotal = useContext(Cart);
 
     function search(value) {
+        console.log(value);
         setLoader(true)
         fetch(`https://dummyjson.com/products/search?q=${value}`)
             .then((res) => res.json())
             .then((data) => {
                 setProduct(data.products);
                 setLoader(false)
-                // console.log(data.products);
+                 console.log(data.products);
             })
             .catch((error) => {
                 console.log(error);
@@ -32,8 +38,8 @@ function Home() {
         // setProduct(tempobject)
         setLastSearch(searchinput)
         setSearchInput("");
-        console.log(value);
-
+       
+       
     }
 
     function pressEnter(e) {
@@ -58,14 +64,24 @@ function Home() {
 
             });
     }, []);
+     
+     useEffect(()=>{
+        setCartItem(cartTotal.state.basket.length);
+     },[cartTotal.state.basket])
+     
+        // console.log(cartTotal);
+
+   
     return <>
+    
         <Navbar
             pressEnter={pressEnter}
             searchinput={searchinput}
             setSearchInput={setSearchInput}
             search={search}
-            cartvalue={cartitem}
+            cartvalue={cartItem}
         />
+        
         {!loader && <div className="total-card">
             {product.map((item, index) => (
                 <Products
@@ -74,7 +90,7 @@ function Home() {
                     category={item.category}
                     price={item.price}
                     rating={item.rating}
-                    brand={item.brand}
+                    title={item.title}
                     description={item.description}
                     id={item.id}
                 />
