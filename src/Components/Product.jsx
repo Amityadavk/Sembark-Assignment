@@ -2,9 +2,25 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Cart } from "../context/Context";
 import Home from "../Pages/Home";
+import { useState } from "react";
+import "./product.css"
+
 
 function Products({ image, category, price, rating, title, description, id }) {
+
+    const [addedToCart, setAddedTocart] = useState(false);
     const cartValue = useContext(Cart)
+    function removeToCart(id) {
+        cartValue.dispatch({
+            type: "remove from cart",
+            payload: {
+                id: id,
+            }
+        })
+        // setAddedTocart(false)
+    }
+
+
     const addToCart = () => {
         cartValue.dispatch({
             type: "add to cart",
@@ -14,9 +30,10 @@ function Products({ image, category, price, rating, title, description, id }) {
                 category: category,
                 price: price,
                 image: image,
-                qty:1,
+                qty: 1,
             }
         })
+        // setAddedTocart(true);
         // cartValue.basketlength()
     }
     // console.log(cartValue.state.basket);
@@ -27,7 +44,7 @@ function Products({ image, category, price, rating, title, description, id }) {
     return <div>
 
         <div className="card">
-            
+
             <img src={image} alt="" />
             <div className="card-details">
                 <div>
@@ -50,11 +67,24 @@ function Products({ image, category, price, rating, title, description, id }) {
                 <p>{description.length > 55 ? description.slice(0, 55) + "..." : description}</p>
             </div>
 
-            <div className="card-button-div">
-                {/* <NavLink to="/cart"> */}
-                <button onClick={addToCart} className="card-button">Add to Cart</button>
-                {/* </NavLink> */}
-            </div>
+            {cartValue.state.basket.some((item) => item.id == id) ?
+                <div className="card-button-div-qty-remove-btn">
+                    <div className='cart-card-qty'>
+                        <p> Qty-<span>{2}</span></p>
+                        <div className='cart-card-qty-btn-div'>
+                            <button >-</button>
+                            <button >+</button>
+                        </div>
+                    </div>
+                    <button onClick={() => removeToCart(id)} className='product-card-remove-btn'>Remove to Cart</button>
+                </div>
+                :
+                <div className="card-button-div">
+                    <button onClick={addToCart} className="card-button">Add to Cart</button>
+                </div>
+            }
+
+
 
 
         </div>

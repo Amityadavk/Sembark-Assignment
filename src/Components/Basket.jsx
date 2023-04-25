@@ -80,9 +80,9 @@ const Basket = () => {
     })
   }
 
-useEffect(()=>{
-  addToCartData.dispatch({type: "cart total price"})
-},[addToCartData.state.basket])
+  useEffect(() => {
+    addToCartData.dispatch({ type: "cart total price" })
+  }, [addToCartData.state.basket])
 
 
 
@@ -115,10 +115,9 @@ useEffect(()=>{
               <button onClick={() => decreaseQty(item.id)}>-</button>
               <button onClick={() => increaseQty(item.id)}>+</button>
             </div>
-
           </div>
           <p>INR {item.price * item.qty}</p>
-          <button onClick={() => removeCartItem(item.id)}>Remove</button>
+          <button className='cart-card-btn' onClick={() => removeCartItem(item.id)}>Remove</button>
 
           {/* </div> */}
 
