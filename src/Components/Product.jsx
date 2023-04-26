@@ -39,6 +39,27 @@ function Products({ image, category, price, rating, title, description, id }) {
     // console.log(cartValue.state.basket);
     // console.log()
 
+     // Increase and Decrease quantity
+
+  function increaseQty() {
+    cartValue.dispatch({
+      type: "increase qty",
+      payload: {
+        id: id,
+      }
+    })
+  }
+
+  function decreaseQty() {
+    cartValue.dispatch({
+      type: "decrease qty",
+      payload: {
+        id: id,
+
+      }
+    })
+  }
+
 
 
     return <div>
@@ -72,8 +93,8 @@ function Products({ image, category, price, rating, title, description, id }) {
                     <div className='cart-card-qty'>
                         <p> Qty-<span>{2}</span></p>
                         <div className='cart-card-qty-btn-div'>
-                            <button >-</button>
-                            <button >+</button>
+                            <button onClick={decreaseQty}>-</button>
+                            <button onClick={increaseQty}>+</button>
                         </div>
                     </div>
                     <button onClick={() => removeToCart(id)} className='product-card-remove-btn'>Remove to Cart</button>

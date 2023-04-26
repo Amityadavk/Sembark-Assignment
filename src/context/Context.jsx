@@ -11,6 +11,7 @@ export const Cart = createContext();
 
 
 const initialState = {
+    totalProduct: [],
     basket: [],
     // total_price: 0,
     // cartTotalItem: 0,
@@ -29,7 +30,7 @@ function Context({ children }) {
     //     dispatch({type: "cart total item"})
     // },[state.basket])
     return <Cart.Provider value={{ state: state, dispatch: dispatch }}>{children}</Cart.Provider>
-    
+
 }
 
 

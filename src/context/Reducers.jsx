@@ -1,9 +1,9 @@
 
 import Context from "./Context";
 const cartReducer = (state, action) => {
-    console.log("action", action.type);
+    console.log("action", state);
     // if(action.type==="add to cart") {
-    //     // console.log("state", state);
+
     //     return {...state, basket: [...state.basket, {...action.payload}]}
     //     // return [...state[0].basket,action[0].payload]
     // }
@@ -25,6 +25,8 @@ const cartReducer = (state, action) => {
 
     switch (action.type) {
         // console.log(action.type)
+
+
         case "add to cart":
             return { ...state, basket: [...state.basket, { ...action.payload }] }
 
@@ -77,15 +79,21 @@ const cartReducer = (state, action) => {
 
 
         case "cart total price":
-            const totalPrice = state.basket.reduce((initialVal, item)=>{
+            const totalPrice = state.basket.reduce((initialVal, item) => {
                 // let price = item;
 
-                initialVal = initialVal + item.price*item.qty;
+                initialVal = initialVal + item.price * item.qty;
                 console.log(initialVal);
                 return initialVal;
-            },0);
+            }, 0);
+            return { ...state, total_price: totalPrice }
 
-            return{ ...state, total_price:totalPrice}
+        case "total product":
+
+            // return { ...state, basket: [...state.basket, { ...action.payload }] }
+            // let temp = [1, 2, 3, 4, 5, 6];
+            return { ...state, totalProduct: [...action.payload] }
+
 
         default:
             return state;

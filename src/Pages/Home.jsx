@@ -15,6 +15,7 @@ function Home() {
     const [lastSearch, setLastSearch] = useState("")
     const [loader, setLoader] = useState(false);
     const [cartItem, setCartItem] = useState(0);
+    const [productCheck, setProductCheck] = useState(true);
 
     const cartTotal = useContext(Cart);
 
@@ -25,6 +26,7 @@ function Home() {
             .then((res) => res.json())
             .then((data) => {
                 setProduct(data.products);
+              
                 setLoader(false)
                  console.log(data.products);
             })
@@ -49,12 +51,22 @@ function Home() {
         }
     }
 
-    useEffect(() => {
+
+    function productApi(){
         setLoader(true)
         fetch("https://dummyjson.com/products?limit=100&page=0")
             .then((res) => res.json())
             .then((data) => {
-                setProduct(data.products);
+                // setProduct(data.products);
+                // setProductCheck(true)
+                // totalProduct()
+                cartTotal.dispatch({
+                    type: "total product",
+                    payload: data.products
+                })
+                // console.log(data.products)
+                setProductCheck(false)
+               
                 setLoader(false)
                 // console.log(data.products);
             })
@@ -63,16 +75,41 @@ function Home() {
                 setLoader(false)
 
             });
+    }
+
+    useEffect(() => {
+        
+if(cartTotal.state.totalProduct.length===0){
+    productApi()
+}
     }, []);
      
+    console.log(product);
+
+    // function totalProduct(){
+    //     cartTotal.dispatch({
+    //         type: "total product",
+    //         payload: product
+    //     })
+    // }
+    // console.log(totalProduct);
+
+
      useEffect(()=>{
         setCartItem(cartTotal.state.basket.length);
      },[cartTotal.state.basket])
      
+
+     
+     
         // console.log(cartTotal);
+
+
+
 
    
     return <>
+    
     
         <Navbar
             pressEnter={pressEnter}
@@ -83,7 +120,7 @@ function Home() {
         />
         
         {!loader && <div className="total-card">
-            {product.map((item, index) => (
+            {cartTotal.state.totalProduct.map((item, index) => (
                 <Products
                     key={index}
                     image={item.thumbnail}
