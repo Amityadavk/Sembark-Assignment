@@ -8,6 +8,9 @@
     /* margin-top: 10px; */
     cursor: pointer;
 }
+.product-card-remove-btn:hover{
+    background-color: #088395;
+}
 .card-button-div-qty-remove-btn{
 display: flex;
 justify-content: space-evenly;

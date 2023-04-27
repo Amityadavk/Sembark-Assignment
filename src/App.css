@@ -181,6 +181,7 @@ body {
 }
 .card-button:hover {
   transform: scale(1.1);
+  background-color: #088395;
 }
 .price-rating {
   display: flex;

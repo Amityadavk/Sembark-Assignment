@@ -88,10 +88,10 @@ function Products({ image, category, price, rating, title, description, id }) {
                 <p>{description.length > 55 ? description.slice(0, 55) + "..." : description}</p>
             </div>
 
-            {cartValue.state.basket.some((item) => item.id == id) ?
+            {cartValue.state.basket.some((item) => item.id === id) ?
                 <div className="card-button-div-qty-remove-btn">
                     <div className='cart-card-qty'>
-                        <p> Qty-<span>{2}</span></p>
+                        <p> Qty</p>
                         <div className='cart-card-qty-btn-div'>
                             <button onClick={decreaseQty}>-</button>
                             <button onClick={increaseQty}>+</button>

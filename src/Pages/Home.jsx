@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Products from "../Components/Product";
 
-
+import "./home.css"
 import Navbar from "../Components/Navbar";
 import { Cart } from "../context/Context";
 import { useContext } from "react";
@@ -10,12 +10,12 @@ import { useContext } from "react";
 
 
 function Home() {
-    const [product, setProduct] = useState([]);
+    // const [product, setProduct] = useState([]);
     const [searchinput, setSearchInput] = useState("");
     const [lastSearch, setLastSearch] = useState("")
     const [loader, setLoader] = useState(false);
     const [cartItem, setCartItem] = useState(0);
-    const [productCheck, setProductCheck] = useState(true);
+    // const [productCheck, setProductCheck] = useState(true);
 
     const cartTotal = useContext(Cart);
 
@@ -25,7 +25,11 @@ function Home() {
         fetch(`https://dummyjson.com/products/search?q=${value}`)
             .then((res) => res.json())
             .then((data) => {
-                setProduct(data.products);
+                // setProduct(data.products);
+                cartTotal.dispatch({
+                    type: "total product",
+                    payload: data.products
+                })
               
                 setLoader(false)
                  console.log(data.products);
@@ -65,7 +69,7 @@ function Home() {
                     payload: data.products
                 })
                 // console.log(data.products)
-                setProductCheck(false)
+              
                
                 setLoader(false)
                 // console.log(data.products);
@@ -84,7 +88,7 @@ if(cartTotal.state.totalProduct.length===0){
 }
     }, []);
      
-    console.log(product);
+    // console.log(product);
 
     // function totalProduct(){
     //     cartTotal.dispatch({
@@ -134,7 +138,7 @@ if(cartTotal.state.totalProduct.length===0){
             ))}
         </div>}
         {loader && <h1 className="loader">Loading...</h1>}
-        {product.length === 0 && loader === false && <h1>No Data Found {lastSearch} </h1>}
+        {cartTotal.state.totalProduct.length === 0 && loader === false && <h1>No Data Found {lastSearch} </h1>}
 
     </>
 
