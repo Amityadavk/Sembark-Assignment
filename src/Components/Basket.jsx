@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Cart } from "../context/Context";
 import { useContext } from "react";
 import "./basket.css";
@@ -120,7 +120,7 @@ const Basket = () => {
               className="cart-card-btn"
               onClick={() => removeCartItem(item.id)}
             >
-              Remove
+              Remove 
             </button>
           </div>
         </div>
