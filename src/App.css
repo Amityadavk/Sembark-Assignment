@@ -93,7 +93,7 @@ body {
 .cart {
   display: flex;
   flex-direction: column;
-
+  cursor: pointer;
   align-items: center;
   position: relative;
   /* border: 2px solid red; */
@@ -134,7 +134,7 @@ body {
   justify-content: space-between;
   margin: 0 40px;
 
-  padding-top: 150px;
+  padding-top: 120px;
 }
 .card {
   /* border: 2px solid red; */
