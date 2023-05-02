@@ -6,7 +6,7 @@ import { useState } from "react";
 import "./product.css"
 
 
-function Products({ image, category, price, rating, title, description, id }) {
+function Products({ image, category, price, rating, title, description, id,stock,qty }) {
 
     const [addedToCart, setAddedTocart] = useState(false);
     const cartValue = useContext(Cart)
@@ -30,7 +30,8 @@ function Products({ image, category, price, rating, title, description, id }) {
                 category: category,
                 price: price,
                 image: image,
-                qty: 1,
+                qty: qty,
+                stock: stock
             }
         })
         // setAddedTocart(true);
@@ -91,7 +92,7 @@ function Products({ image, category, price, rating, title, description, id }) {
             {cartValue.state.basket.some((item) => item.id === id) ?
                 <div className="card-button-div-qty-remove-btn">
                     <div className='cart-card-qty'>
-                        <p> Qty</p>
+                        <p> Qty-{qty}</p>
                         <div className='cart-card-qty-btn-div'>
                             <button onClick={decreaseQty}>-</button>
                             <button onClick={increaseQty}>+</button>

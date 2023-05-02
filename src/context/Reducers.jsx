@@ -40,13 +40,16 @@ const cartReducer = (state, action) => {
             return { ...state, basket: updatedCart };
 
         case "increase qty":
-            const updatedQty = state.basket.map((item) => {
-
+            const updatedQty = state.totalProduct.map((item) => {
+console.log(item);
                 if (item.id === action.payload.id) {
                     let increQty = item.qty + 1;
                     // if(item.id === action.payload.id){
                     // let newPrice = item.price *item.qty;
                     //     return {...item, price:newPrice}
+                    // }
+                    // if (item.qty ===item.stock) {
+                    //     return { ...item, qty: item.stock }
                     // }
                     return { ...item, qty: increQty }
 
@@ -57,7 +60,7 @@ const cartReducer = (state, action) => {
                 }
 
             });
-            return { ...state, basket: updatedQty }
+            return { ...state, totalProduct: updatedQty }
 
         case "decrease qty":
             const updatedDecreaseQty = state.basket.map((item) => {
@@ -66,9 +69,9 @@ const cartReducer = (state, action) => {
                     const decreQty = item.qty - 1;
                     if (item.qty <= 1) {
                         return { ...item, qty: 1 }
-
-
                     }
+                   
+
                     return { ...item, qty: decreQty }
                 } else {
                     return item;

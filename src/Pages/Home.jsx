@@ -30,9 +30,9 @@ function Home() {
                     type: "total product",
                     payload: data.products
                 })
-              
+
                 setLoader(false)
-                 console.log(data.products);
+                console.log(data.products);
             })
             .catch((error) => {
                 console.log(error);
@@ -44,8 +44,8 @@ function Home() {
         // setProduct(tempobject)
         setLastSearch(searchinput)
         setSearchInput("");
-       
-       
+
+
     }
 
     function pressEnter(e) {
@@ -56,7 +56,7 @@ function Home() {
     }
 
 
-    function productApi(){
+    function productApi() {
         setLoader(true)
         fetch("https://dummyjson.com/products?limit=100&page=0")
             .then((res) => res.json())
@@ -64,13 +64,18 @@ function Home() {
                 // setProduct(data.products);
                 // setProductCheck(true)
                 // totalProduct()
+                let arr = data.products;
+                for (let i = 0; i < data.products.length; i++) {
+                    arr[i].qty = 1
+                }
+                console.log(arr);
                 cartTotal.dispatch({
                     type: "total product",
-                    payload: data.products
+                    payload: arr
                 })
                 // console.log(data.products)
-              
-               
+
+
                 setLoader(false)
                 // console.log(data.products);
             })
@@ -82,39 +87,47 @@ function Home() {
     }
 
     useEffect(() => {
-        
-if(cartTotal.state.totalProduct.length===0){
-    productApi()
-}
+
+        if (cartTotal.state.totalProduct.length === 0) {
+            productApi()
+        }
     }, []);
-     
+
     // console.log(product);
 
-    // function totalProduct(){
-    //     cartTotal.dispatch({
-    //         type: "total product",
-    //         payload: product
-    //     })
-    // }
+    function totalProduct() {
+        // cartTotal.dispatch({
+        //     type: "total product",
+        //     payload: product
+        // })
+        console.log(cartTotal);
+    }
+    // useEffect(() => {
+    //     let arr = cartTotal.state.totalProduct;
+    //     for (let i = 0; i < cartTotal.state.totalProduct.length; i++) {
+    //         arr[i].qty = 1;
+    //     }
+    //     console.log(arr);
+    // }, [totalProduct])
     // console.log(totalProduct);
 
 
-     useEffect(()=>{
+    useEffect(() => {
         setCartItem(cartTotal.state.basket.length);
-     },[cartTotal.state.basket])
-     
-
-     
-     
-        // console.log(cartTotal);
+    }, [cartTotal.state.basket])
 
 
 
 
-   
+    // console.log(cartTotal);
+
+
+
+
+
     return <>
-    
-    
+        <button onClick={totalProduct}>total product</button>
+
         <Navbar
             pressEnter={pressEnter}
             searchinput={searchinput}
@@ -122,7 +135,7 @@ if(cartTotal.state.totalProduct.length===0){
             search={search}
             cartvalue={cartItem}
         />
-        
+
         {!loader && <div className="total-card">
             {cartTotal.state.totalProduct.map((item, index) => (
                 <Products
@@ -134,6 +147,8 @@ if(cartTotal.state.totalProduct.length===0){
                     title={item.title}
                     description={item.description}
                     id={item.id}
+                    stock={item.stock}
+                    qty={item.qty}
                 />
             ))}
         </div>}

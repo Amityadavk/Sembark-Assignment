@@ -1,8 +1,9 @@
-import { FaShoppingCart } from 'react-icons/fa';
+
+import {HiShoppingCart} from "react-icons/hi"
 import { useNavigate } from 'react-router-dom';
 // import data from ".../db.json"
 
-
+// AiOutlineShoppingCart
 
 function Navbar({ pressEnter, searchinput, setSearchInput, search, cartvalue }) {
 
@@ -21,8 +22,9 @@ function Navbar({ pressEnter, searchinput, setSearchInput, search, cartvalue }) 
                     </div>
                     {/* <Link to="/cart"> */}
                     <div className='cart' onClick={() => navigate("/cart")}>
-                        <FaShoppingCart className="cart-icon" />
-                        <div className='cart-item'><span>{cartvalue}</span></div>
+                        <HiShoppingCart className="cart-icon" />
+                        {cartvalue!==0 && <div className='cart-item'><span>{cartvalue}</span></div> }
+                        {/* <div className='cart-item'><span>{cartvalue}</span></div> */}
                     </div>
                     {/* </Link> */}
 
