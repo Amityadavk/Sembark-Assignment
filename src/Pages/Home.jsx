@@ -23,6 +23,9 @@ function Home() {
       .then((res) => res.json())
       .then((data) => {
         // setProduct(data.products);
+        data.products.map((item) => {
+          item.qty = 1;
+        });
         cartTotal.dispatch({
           type: "total product",
           payload: data.products,
@@ -107,6 +110,11 @@ function Home() {
 
   // console.log(cartTotal);
 
+  // sort by price
+  const sortPrice = ()=>{
+    cartTotal.dispatch({type: "get sort value"})
+  };
+
   return (
     <>
       {/* <button onClick={totalProduct}>total product</button> */}
@@ -124,11 +132,9 @@ function Home() {
             <div className="sort-filter-background-div">
         <div className="sort-filter">
           <select
-          // onChange={(e) => {
-          //   setSort(e.target.value);
-          // }}
+          onClick={sortPrice}
           // name="price"
-          // id="price"
+          id="price"
           >
             <option value="">Sort</option>
             <option disabled></option>

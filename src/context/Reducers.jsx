@@ -31,7 +31,10 @@ const cartReducer = (state, action) => {
     case "remove from cart":
       const updatedCart = state.basket.filter(
         (item) => item.id !== action.payload.id
+        // item.qty=1;
+        // return item.qty=1
       );
+     
       console.log("updatedcart", updatedCart);
 
       return { ...state, basket: updatedCart };
@@ -106,6 +109,10 @@ const cartReducer = (state, action) => {
       // return { ...state, basket: [...state.basket, { ...action.payload }] }
       // let temp = [1, 2, 3, 4, 5, 6];
       return { ...state, totalProduct: [...action.payload] };
+
+    case "get sort value":
+
+      
 
     default:
       return state;

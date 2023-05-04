@@ -30,12 +30,14 @@ const Basket = () => {
       type: "remove from cart",
       payload: {
         id: id,
+        
         // price:price*qty
         // title:title,
         // category:category,
         // price:price,
         // image:image
       },
+
       // const newCartItem = cartArray.filter((item)=>(
       //   item.id !== id
       // ));
