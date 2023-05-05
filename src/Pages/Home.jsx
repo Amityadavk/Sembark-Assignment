@@ -64,7 +64,7 @@ function Home() {
         data.products.map((item) => {
           item.qty = 1;
         });
-        console.log(data.products);
+        // console.log(data.products);
         cartTotal.dispatch({
           type: "total product",
           payload: data.products,
@@ -85,7 +85,6 @@ function Home() {
       productApi();
     }
   }, []);
-  
 
   // console.log(product);
 
@@ -115,25 +114,33 @@ function Home() {
     //   })
     // })
 
-  //   var totalProductArr = cartTotal.state.totalProduct;
-  //   var totalBasket = cartTotal.state.basket;
-  //   for (var i = 0; i < totalProductArr.length; i++) {
-  //     for (var j = 0; j < totalBasket.length; j++) {
-  //       // if (totalProductArr(i).id !== totalBasket(j).id) {
-  //         //  totalProductArr(i).qty = 1;
-  //         console.log(totalProductArr);
-  //       // }
-  //     }
-  //   }
+    //   var totalProductArr = cartTotal.state.totalProduct;
+    //   var totalBasket = cartTotal.state.basket;
+    //   for (var i = 0; i < totalProductArr.length; i++) {
+    //     for (var j = 0; j < totalBasket.length; j++) {
+    //       // if (totalProductArr(i).id !== totalBasket(j).id) {
+    //         //  totalProductArr(i).qty = 1;
+    //         console.log(totalProductArr);
+    //       // }
+    //     }
+    //   }
   }, [cartTotal]);
-
 
   // console.log(cartTotal);
 
   // sort by price
   const sortPrice = () => {
-    cartTotal.dispatch({ type: "get sort value" })
+    cartTotal.dispatch({
+      type: "get sort value",
+      // payload: cartTotal.totalProduct
+    });
   };
+  useEffect(() => {
+    cartTotal.dispatch({
+      type: "sorted data",
+      payload: cartTotal.state.totalProduct,
+    });
+  }, [cartTotal.state.sortPriceValue]);
 
   return (
     <>
@@ -146,42 +153,34 @@ function Home() {
         cartvalue={cartItem}
       />
 
-
       {!loader && (
         <div className="total-card">
           <div className="sort-filter-background-div">
             <div className="sort-filter">
               <select
-                onClick={sortPrice}
-                // name="price"
-                id="price"
+              //  onChange={sortPrice} name="sort" id="sort"
               >
-                <option value="">Sort</option>
+                <option value="sort">Sort</option>
                 <option disabled></option>
                 <option value="htl">Price: High to Low</option>
                 <option disabled></option>
                 <option value="lth">Price: Low to High</option>
               </select>
-              <select
-              // onChange={(e) => {
-              //   setCategory(e.target.value);
-              // }}
-              // name="beds"
-              // id="beds"
-              >
+
+              <select onChange={sortPrice} name="sort" id="sort">
                 <option value="">Category</option>
                 <option value="#" disabled></option>
-                <option value="Stool">smartphones</option>
+                <option value="smartphones">smartphones</option>
                 <option value="#" disabled></option>
-                <option value="Bed">laptops</option>
+                <option value="laptops">laptops</option>
                 <option value="#" disabled></option>
-                <option value="Chaise">lighting</option>
+                <option value="lighting">lighting</option>
                 <option value="#" disabled></option>
-                <option value="LED">home-decoration</option>
+                <option value="home-decoration">home-decoration</option>
                 <option value="#" disabled></option>
-                <option value="Chair">mens-shoes</option>
+                <option value="mens-shoes">mens-shoes</option>
                 <option value="#" disabled></option>
-                <option value="Wardrobe">sunglasses</option>
+                <option value="sunglasses">sunglasses</option>
               </select>
               <select
               // onChange={(e) => {

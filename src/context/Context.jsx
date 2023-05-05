@@ -14,7 +14,7 @@ const initialState = {
     totalProduct: [],
     basket: [],
     removedCartItem: false,
-    sortPriceValue: "lth",
+    sortPriceValue: "sort",
     // total_price: 0,
     // cartTotalItem: 0,
     // cardData:[{
