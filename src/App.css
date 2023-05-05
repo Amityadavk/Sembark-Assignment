@@ -169,7 +169,7 @@ body {
 }
 .card-button {
   color: white;
-
+  margin-bottom: 20px;
   background-color: #609ea2;
   border: none;
   border-radius: 5px;

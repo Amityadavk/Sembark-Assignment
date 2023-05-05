@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Cart } from "../context/Context";
 import Home from "../Pages/Home";
@@ -9,6 +9,7 @@ import "./product.css"
 function Products({ image, category, price, rating, title, description, id,stock,qty }) {
 
     const [addedToCart, setAddedTocart] = useState(false);
+    // const [removedCartItem, setRemovedCartItem] = useState(false);
     const cartValue = useContext(Cart)
     function removeToCart(id) {
         cartValue.dispatch({
@@ -17,8 +18,27 @@ function Products({ image, category, price, rating, title, description, id,stock
                 id: id,
             }
         })
-        // setAddedTocart(false)
+        cartValue.dispatch({
+            type: "removed item",
+            payload: {
+              id: id,
+            //   qty: 1
+            }
+          })
+        // cartValue.state.removedCartItem(true);
     }
+
+    // useEffect(()=>{
+    //     if(cartValue.state.removedCartItem){
+
+    //         cartValue.state.totalProduct.map((item)=>(
+    //             // if(caremovedCartItem){
+    
+    //                 item.qty=1
+    //             // }
+    //         ))
+    //     }
+    //   },[cartValue.state.removedCartItem])
 
 
     const addToCart = () => {
@@ -34,6 +54,7 @@ function Products({ image, category, price, rating, title, description, id,stock
                 stock: stock
             }
         })
+        // cartValue.state.removedCartItem(false);
         // setAddedTocart(true);
         // cartValue.basketlength()
     }
@@ -79,7 +100,7 @@ function Products({ image, category, price, rating, title, description, id,stock
                     <h5>{category}</h5>
                     <p>{price}</p>
                     <p>{rating}</p>
-                    <p>{title}</p>
+                    <p>{title.length > 13 ? title.slice(0,13)+"...": title}</p>
                 </div>
             </div>
 

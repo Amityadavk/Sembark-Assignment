@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Cart } from "../context/Context";
 import { useContext } from "react";
 import "./basket.css";
@@ -13,7 +13,7 @@ const Basket = () => {
   // image: image,
 
   // state for cart array
-  // const [cartArray, setCartArray] = useState([]);
+  // const [removed, setRemoved] = useState(false);
 
   // taken a useContext hook
   const addToCartData = useContext(Cart);
@@ -30,20 +30,17 @@ const Basket = () => {
       type: "remove from cart",
       payload: {
         id: id,
-        
-        // price:price*qty
-        // title:title,
-        // category:category,
-        // price:price,
-        // image:image
       },
-
-      // const newCartItem = cartArray.filter((item)=>(
-      //   item.id !== id
-      // ));
-      // setCartArray(newCartItem)
-      // console.log(newCartItem);
     });
+    addToCartData.dispatch({
+      type: "removed item",
+      payload: {
+        id: id,
+        // qty: 1
+      }
+    })
+
+    // addToCartData.state.removedCartItem(true);
   }
 
   // Increase and Decrease quantity
@@ -65,6 +62,16 @@ const Basket = () => {
       },
     });
   }
+
+  // useEffect(()=>{
+  //   if(addToCartData.state.removedCartItem){
+
+  //     addToCartData.state.totalProduct.map((item)=>{
+  //       item.qty=1;
+
+  //   })
+  //   }
+  // },[addToCartData.state.removedCartItem])
 
   useEffect(() => {
     addToCartData.dispatch({ type: "cart total price" });
@@ -101,7 +108,8 @@ const Basket = () => {
 
 
           <div className="cart-card-title-qty">
-            <p>{item.title}</p>
+            <p>{item.title.length > 13 ? item.title.slice(0,13)+"...": item.title}</p>
+            
             <div className="cart-card-qty">
               <p>
                 {" "}

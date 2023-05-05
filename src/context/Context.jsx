@@ -13,6 +13,7 @@ export const Cart = createContext();
 const initialState = {
     totalProduct: [],
     basket: [],
+    removedCartItem: false,
     sortPriceValue: "lth",
     // total_price: 0,
     // cartTotalItem: 0,
