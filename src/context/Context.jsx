@@ -12,9 +12,12 @@ export const Cart = createContext();
 
 const initialState = {
     totalProduct: [],
+    filter_sortData:[],
     basket: [],
     removedCartItem: false,
     sortPriceValue: "sort",
+    filterCategoryValue: "category",
+    // tempSortedData: [],
     // total_price: 0,
     // cartTotalItem: 0,
     // cardData:[{

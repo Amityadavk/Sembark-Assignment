@@ -135,12 +135,27 @@ function Home() {
       // payload: cartTotal.totalProduct
     });
   };
+  const filterCategory = ()=>{
+    cartTotal.dispatch({
+      type: "get filter category value"
+    })
+  }
+
   useEffect(() => {
     cartTotal.dispatch({
       type: "sorted data",
-      payload: cartTotal.state.totalProduct,
+      payload: cartTotal.state.filter_sortData,
     });
   }, [cartTotal.state.sortPriceValue]);
+
+
+  useEffect(()=>{
+    cartTotal.dispatch({
+      type: "filter category data",
+      payload: cartTotal.state.filter_sortData
+    })
+  },[cartTotal.state.filterCategoryValue])
+
 
   return (
     <>
@@ -158,7 +173,7 @@ function Home() {
           <div className="sort-filter-background-div">
             <div className="sort-filter">
               <select
-              //  onChange={sortPrice} name="sort" id="sort"
+                onChange={sortPrice} name="sort" id="sort"
               >
                 <option value="sort">Sort</option>
                 <option disabled></option>
@@ -167,8 +182,10 @@ function Home() {
                 <option value="lth">Price: Low to High</option>
               </select>
 
-              <select onChange={sortPrice} name="sort" id="sort">
-                <option value="">Category</option>
+              <select
+                onChange={filterCategory} name="category" id="category"
+              >
+                <option value="category">Category</option>
                 <option value="#" disabled></option>
                 <option value="smartphones">smartphones</option>
                 <option value="#" disabled></option>
@@ -201,7 +218,7 @@ function Home() {
               </select>
             </div>
           </div>
-          {cartTotal.state.totalProduct.map((item, index) => (
+          {cartTotal.state.filter_sortData.map((item, index) => (
             <Products
               key={index}
               image={item.thumbnail}

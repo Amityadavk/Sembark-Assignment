@@ -98,7 +98,7 @@ function Products({ image, category, price, rating, title, description, id,stock
                 </div>
                 <div>
                     <h5>{category}</h5>
-                    <p>{price}</p>
+                    <p>{price} $</p>
                     <p>{rating}</p>
                     <p>{title.length > 13 ? title.slice(0,13)+"...": title}</p>
                 </div>

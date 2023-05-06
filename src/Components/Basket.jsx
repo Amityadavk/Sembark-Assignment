@@ -125,7 +125,7 @@ const Basket = () => {
 
 
           <div className="cart-card-price-remove-btn">
-            <p>INR {item.price * item.qty}</p>
+            <p>{item.price * item.qty} $</p>
             <button
               className="cart-card-btn"
               onClick={() => removeCartItem(item.id)}
@@ -137,10 +137,10 @@ const Basket = () => {
       ))}
       <div className="card-order-total">
         <div className="order-total">
-          <h6>Total: INR {addToCartData.state.total_price}</h6>
+          <h6>Total:{addToCartData.state.total_price} $</h6>
           <h6>shipping Fee: Free</h6>
           <hr />
-          <h2>Order Total: INR {addToCartData.state.total_price}</h2>
+          <h2>Order Total:{addToCartData.state.total_price} $</h2>
         </div>
       </div>
     </>
