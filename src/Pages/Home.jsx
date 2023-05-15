@@ -5,6 +5,9 @@ import "./home.css";
 import Navbar from "../Components/Navbar";
 import { Cart } from "../context/Context";
 import { useContext } from "react";
+// import Spinner from 'react-bootstrap/Spinner';
+// import { Spinner } from "@chakra-ui/spinner"
+// import { Spinner } from '@chakra-ui/react'
 
 function Home() {
   // const [product, setProduct] = useState([]);
@@ -78,6 +81,7 @@ function Home() {
         console.log(err);
         setLoader(false);
       });
+      
   }
 
   useEffect(() => {
@@ -135,7 +139,7 @@ function Home() {
       // payload: cartTotal.totalProduct
     });
   };
-  const filterCategory = ()=>{
+  const filterCategory = () => {
     cartTotal.dispatch({
       type: "get filter category value"
     })
@@ -149,12 +153,12 @@ function Home() {
   }, [cartTotal.state.sortPriceValue]);
 
 
-  useEffect(()=>{
+  useEffect(() => {
     cartTotal.dispatch({
       type: "filter category data",
       payload: cartTotal.state.filter_sortData
     })
-  },[cartTotal.state.filterCategoryValue])
+  }, [cartTotal.state.filterCategoryValue])
 
 
   return (
@@ -234,7 +238,8 @@ function Home() {
           ))}
         </div>
       )}
-      {loader && <h1 className="loader">Loading...</h1>}
+      {/* {loader && <h1 className="loader">Loading...</h1> } */}
+      {/* {loader &&  <Spinner className="loader" animation="border" variant="primary" />} */}
       {cartTotal.state.totalProduct.length === 0 && loader === false && (
         <h1>No Data Found {lastSearch} </h1>
       )}

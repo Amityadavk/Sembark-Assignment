@@ -68,8 +68,20 @@ const cartReducer = (state, action) => {
                     return item;
                 }
             });
+            const updatedSortFilterQty = state.filter_sortData.map((item) => {
+                console.log(item);
+                if (item.id === action.payload.id) {
+                    let increQty = item.qty + 1;
+                    if (item.qty === item.stock) {
+                        return { ...item, qty: item.stock };
+                    }
+                    return { ...item, qty: increQty };
+                } else {
+                    return item;
+                }
+            })
 
-            return { ...state, basket: updatedCartQty, totalProduct: updatedQty };
+            return { ...state, basket: updatedCartQty, totalProduct: updatedQty, filter_sortData: updatedSortFilterQty };
 
         case "decrease qty":
             const updatedDecreaseCartQty = state.basket.map((item) => {
@@ -94,11 +106,23 @@ const cartReducer = (state, action) => {
                     return item;
                 }
             });
+            const updatedDecreaseFilterSortQty = state.filter_sortData.map((item) => {
+                if (item.id === action.payload.id) {
+                    const decreQty = item.qty - 1;
+                    if (item.qty <= 1) {
+                        return { ...item, qty: 1 };
+                    }
+                    return { ...item, qty: decreQty };
+                } else {
+                    return item;
+                }
+            });
 
             return {
                 ...state,
                 basket: updatedDecreaseCartQty,
                 totalProduct: updatedDecreaseQty,
+                filter_sortData: updatedDecreaseFilterSortQty
             };
 
         case "cart total price":

@@ -38,6 +38,7 @@
 } */
 * {
   margin: 0;
+  padding: 0;
 }
 body {
   /* max-width: 1400px; */
@@ -63,6 +64,8 @@ body {
 .site-name {
   font-size: 2rem;
   color: white;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 .search-box {
   display: flex;
@@ -192,6 +195,11 @@ body {
   justify-content: space-around;
 }
 .loader {
-  padding-top: 150px;
-  text-align: center;
+  /* padding-top: 150px; */
+  /* align-items: center; */
+  margin: auto;
+  /* height: 50px;
+  width: 50px; */
+  
+  
 }

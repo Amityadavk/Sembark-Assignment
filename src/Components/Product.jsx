@@ -77,9 +77,9 @@ function Products({ image, category, price, rating, title, description, id,stock
       type: "decrease qty",
       payload: {
         id: id,
-
-      }
-    })
+    }
+})
+console.log("decrease", qty)
   }
 
 
