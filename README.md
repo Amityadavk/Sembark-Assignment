@@ -1,4 +1,5 @@
 # Getting Started with Create React App
+cCheckout deployed link https://shopping-web-react.netlify.app/home
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
