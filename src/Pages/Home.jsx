@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Products from "../Components/Product";
+import Loader from "../Components/Loader";
 
 import "./home.css";
 import Navbar from "../Components/Navbar";
@@ -15,7 +16,8 @@ function Home() {
   const [lastSearch, setLastSearch] = useState("");
   const [loader, setLoader] = useState(false);
   const [cartItem, setCartItem] = useState(0);
-  // const [productCheck, setProductCheck] = useState(true);
+  // const [sortValue, setSortValue] = useState("default");
+  // const [filterValue, setFilterValue] = useState("all");
 
   const cartTotal = useContext(Cart);
 
@@ -33,6 +35,7 @@ function Home() {
           type: "total product",
           payload: data.products,
         });
+        displayProductData([...data.products], cartTotal.state.sortPriceValue, cartTotal.state.filterCategoryValue);
 
         setLoader(false);
         console.log(data.products);
@@ -70,18 +73,21 @@ function Home() {
         // console.log(data.products);
         cartTotal.dispatch({
           type: "total product",
-          payload: data.products,
+          payload: [...data.products],
         });
+
+
+        displayProductData([...data.products], cartTotal.state.sortPriceValue, cartTotal.state.filterCategoryValue);
         // console.log(data.products)
 
         setLoader(false);
-        // console.log(data.products);
+
       })
       .catch((err) => {
         console.log(err);
         setLoader(false);
       });
-      
+
   }
 
   useEffect(() => {
@@ -90,75 +96,83 @@ function Home() {
     }
   }, []);
 
-  // console.log(product);
-
-  // function totalProduct() {
-  //     // cartTotal.dispatch({
-  //     //     type: "total product",
-  //     //     payload: product
-  //     // })
-  //     console.log(cartTotal);
-  // }
-  // useEffect(() => {
-  //     let arr = cartTotal.state.totalProduct;
-  //     for (let i = 0; i < cartTotal.state.totalProduct.length; i++) {
-  //         arr[i].qty = 1;
-  //     }
-  //     console.log(arr);
-  // }, [totalProduct])
-  // console.log(totalProduct);
+  //
 
   useEffect(() => {
     setCartItem(cartTotal.state.basket.length);
-    // cartTotal.state.totalProduct.map((item)=>{
-    //   cartTotal.state.basket.map((item)=>{
-    //     if(item.id!==item.id){
-    //       item.qty=1;
-    //     }
-    //   })
-    // })
 
-    //   var totalProductArr = cartTotal.state.totalProduct;
-    //   var totalBasket = cartTotal.state.basket;
-    //   for (var i = 0; i < totalProductArr.length; i++) {
-    //     for (var j = 0; j < totalBasket.length; j++) {
-    //       // if (totalProductArr(i).id !== totalBasket(j).id) {
-    //         //  totalProductArr(i).qty = 1;
-    //         console.log(totalProductArr);
-    //       // }
-    //     }
-    //   }
   }, [cartTotal]);
 
-  // console.log(cartTotal);
+
 
   // sort by price
-  const sortPrice = () => {
+  const sortPrice = (value) => {
     cartTotal.dispatch({
       type: "get sort value",
-      // payload: cartTotal.totalProduct
+      payload: value
     });
   };
-  const filterCategory = () => {
+  // filter category value
+  const filterCategory = (value) => {
     cartTotal.dispatch({
-      type: "get filter category value"
+      type: "get filter category value",
+      payload: value
     })
   }
 
-  useEffect(() => {
+
+
+  const displayProductData = (product, sort, category) => {
+    console.log(product);
+    let newSortData = [];
+    if (category === "all" && sort === "default") {
+      newSortData = [...product];
+    } else if (category === "all" && sort !== "default") {
+      newSortData = [...product];
+      if (sort === "htl") {
+        newSortData = newSortData.sort((a, b) =>
+          b.price - a.price
+        );
+      } else {
+        newSortData = newSortData.sort((a, b) =>
+          a.price - b.price
+        );
+      }
+    } else if (category !== "all" && sort === "default") {
+      let result = product.filter(item => item.category == category)
+      newSortData = [...result];
+    } else {
+      if (sort === "lth") {
+        let result = product.filter(item => item.category == category)
+        newSortData = [...result];
+        newSortData = newSortData.sort((a, b) =>
+          a.price - b.price
+        );
+      } else {
+        let result = product.filter(item => item.category == category)
+        newSortData = [...result];
+        newSortData = newSortData.sort((a, b) =>
+          b.price - a.price
+        );
+      }
+    }
+
     cartTotal.dispatch({
-      type: "sorted data",
-      payload: cartTotal.state.filter_sortData,
+      type: "show product",
+      payload: newSortData,
     });
-  }, [cartTotal.state.sortPriceValue]);
+  }
+
 
 
   useEffect(() => {
-    cartTotal.dispatch({
-      type: "filter category data",
-      payload: cartTotal.state.filter_sortData
-    })
-  }, [cartTotal.state.filterCategoryValue])
+    displayProductData(cartTotal.state.totalProduct, cartTotal.state.sortPriceValue, cartTotal.state.filterCategoryValue);
+  }, [cartTotal.state.sortPriceValue, cartTotal.state.filterCategoryValue])
+
+
+
+
+
 
 
   return (
@@ -177,9 +191,10 @@ function Home() {
           <div className="sort-filter-background-div">
             <div className="sort-filter">
               <select
-                onChange={sortPrice} name="sort" id="sort"
+
+                onChange={(e) => { sortPrice(e.target.value) }} name="sort" id="sort" value={cartTotal.state.sortPriceValue}
               >
-                <option value="sort">Sort</option>
+                <option value="default">Default</option>
                 <option disabled></option>
                 <option value="htl">Price: High to Low</option>
                 <option disabled></option>
@@ -187,42 +202,25 @@ function Home() {
               </select>
 
               <select
-                onChange={filterCategory} name="category" id="category"
+                onChange={(e) => { filterCategory(e.target.value) }} name="category" id="category" value={cartTotal.state.filterCategoryValue}
               >
-                <option value="category">Category</option>
+                <option value="all">All</option>
                 <option value="#" disabled></option>
-                <option value="smartphones">smartphones</option>
+                <option value="smartphones">Smartphones</option>
                 <option value="#" disabled></option>
-                <option value="laptops">laptops</option>
+                <option value="laptops">Laptops</option>
                 <option value="#" disabled></option>
-                <option value="lighting">lighting</option>
+                <option value="lighting">Lighting</option>
                 <option value="#" disabled></option>
-                <option value="home-decoration">home-decoration</option>
+                <option value="home-decoration">Home-Decoration</option>
                 <option value="#" disabled></option>
-                <option value="mens-shoes">mens-shoes</option>
+                <option value="mens-shoes">Mens-Shoes</option>
                 <option value="#" disabled></option>
-                <option value="sunglasses">sunglasses</option>
-              </select>
-              <select
-              // onChange={(e) => {
-              //   setPrice(e.target.value);
-              // }}
-              // name="price-range"
-              // id="price-range"
-              >
-                <option value="0">Price</option>
-                <option value="#" disabled></option>
-                <option value="4999">₹0 to 4999</option>
-                <option value="#" disabled></option>
-                <option value="9999">₹5,000 to 9999</option>
-                <option value="#" disabled></option>
-                <option value="14999">₹10,000 to 14999</option>
-                <option value="#" disabled></option>
-                <option value="15000">₹15,000 and above</option>
+                <option value="sunglasses">Sunglasses</option>
               </select>
             </div>
           </div>
-          {cartTotal.state.filter_sortData.map((item, index) => (
+          {cartTotal.state.filterSortData.map((item, index) => (
             <Products
               key={index}
               image={item.thumbnail}
@@ -238,7 +236,7 @@ function Home() {
           ))}
         </div>
       )}
-      {/* {loader && <h1 className="loader">Loading...</h1> } */}
+      {loader && <div className="loader"><Loader /></div>}
       {/* {loader &&  <Spinner className="loader" animation="border" variant="primary" />} */}
       {cartTotal.state.totalProduct.length === 0 && loader === false && (
         <h1>No Data Found {lastSearch} </h1>

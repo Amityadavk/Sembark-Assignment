@@ -68,7 +68,7 @@ const cartReducer = (state, action) => {
                     return item;
                 }
             });
-            const updatedSortFilterQty = state.filter_sortData.map((item) => {
+            const updatedSortFilterQty = state.filterSortData.map((item) => {
                 console.log(item);
                 if (item.id === action.payload.id) {
                     let increQty = item.qty + 1;
@@ -81,7 +81,7 @@ const cartReducer = (state, action) => {
                 }
             })
 
-            return { ...state, basket: updatedCartQty, totalProduct: updatedQty, filter_sortData: updatedSortFilterQty };
+            return { ...state, basket: updatedCartQty, totalProduct: updatedQty, filterSortData: updatedSortFilterQty };
 
         case "decrease qty":
             const updatedDecreaseCartQty = state.basket.map((item) => {
@@ -106,7 +106,7 @@ const cartReducer = (state, action) => {
                     return item;
                 }
             });
-            const updatedDecreaseFilterSortQty = state.filter_sortData.map((item) => {
+            const updatedDecreaseFilterSortQty = state.filterSortData.map((item) => {
                 if (item.id === action.payload.id) {
                     const decreQty = item.qty - 1;
                     if (item.qty <= 1) {
@@ -122,7 +122,7 @@ const cartReducer = (state, action) => {
                 ...state,
                 basket: updatedDecreaseCartQty,
                 totalProduct: updatedDecreaseQty,
-                filter_sortData: updatedDecreaseFilterSortQty
+                filterSortData: updatedDecreaseFilterSortQty
             };
 
         case "cart total price":
@@ -137,8 +137,11 @@ const cartReducer = (state, action) => {
 
         case "total product":
             // return { ...state, basket: [...state.basket, { ...action.payload }] }
-            // let temp = [1, 2, 3, 4, 5, 6];
-            return { ...state, totalProduct: [...action.payload], filter_sortData: [...action.payload] };
+            
+            return { ...state, totalProduct: [...action.payload] };
+
+        case "show product":
+            return {...state, filterSortData: [...action.payload]};
 
         case "removed item":
             const qtyWhenItemRemoved = state.totalProduct.map((item) => {
@@ -148,99 +151,37 @@ const cartReducer = (state, action) => {
                     return item;
                 }
             });
-            // console.log(qtyWhenItemRemoved);
+            
             return { ...state, totalProduct: qtyWhenItemRemoved };
 
         case "get sort value":
-            const userSortValue = document.getElementById("sort");
-            const sortValue =
-                userSortValue.options[userSortValue.selectedIndex].value;
+          
+
+
+            return {...state, sortPriceValue: action.payload}
+            // const userSortValue = document.getElementById("sort");
+            // const sortValue =
+            //     userSortValue.options[userSortValue.selectedIndex].value;
 
             // console.log(sortValue);
-            return { ...state, sortPriceValue: sortValue };
+            // return { ...state, sortPriceValue: sortValue };
 
-        case "sorted data":
-            let newSortData;
-            const tempSortedData = [...action.payload];
-            // console.log(tempSortedData)
-
-            if (state.sortPriceValue === "lth") {
-                newSortData = state.filter_sortData.sort((a, b) =>
-                    a.price - b.price
-                );
-            } else if (state.sortPriceValue === "htl") {
-                newSortData = state.filter_sortData.sort((a, b) =>
-                    b.price - a.price
-                );
-            } else {
-                newSortData = state.totalProduct;
-            }
-            console.log(newSortData);
-            return { ...state, filter_sortData: newSortData };
+        
 
         case "get filter category value":
-            const userfilterCategory = document.getElementById("category");
-            const filterValue =
-                userfilterCategory.options[userfilterCategory.selectedIndex].value;
 
-            console.log(filterValue);
-            return { ...state, filterCategoryValue: filterValue };
+        return {...state, filterCategoryValue: action.payload}
+            // const userfilterCategory = document.getElementById("category");
+            // const filterValue =
+            //     userfilterCategory.options[userfilterCategory.selectedIndex].value;
 
-        case "filter category data":
-
-
-            let filterData = [];
-            const tempFilterData = [...action.payload];
-
-            if (state.filterCategoryValue === "smartphones") {
-                state.totalProduct.map((item) => {
-                    if (item.category === "smartphones") {
-                        filterData = [...filterData, item];
-                    }
-                });
-            } else if (state.filterCategoryValue === "laptops") {
-                state.totalProduct.map((item) => {
-                    if (item.category === "laptops") {
-                        filterData = [...filterData, item];
-                    }
-                });
-            } else if (state.filterCategoryValue === "lighting") {
-                state.totalProduct.map((item) => {
-                    if (item.category === "lighting") {
-                        filterData = [...filterData, item];
-                    }
-                });
-            } else if (state.filterCategoryValue === "home-decoration") {
-                state.totalProduct.map((item) => {
-                    if (item.category === "home-decoration") {
-                        filterData = [...filterData, item];
-                    }
-                });
-            } else if (state.filterCategoryValue === "mens-shoes") {
-                state.totalProduct.map((item) => {
-                    if (item.category === "mens-shoes") {
-                        filterData = [...filterData, item];
-                    }
-                });
-            } else if (state.filterCategoryValue === "sunglasses") {
-                state.totalProduct.map((item) => {
-                    if (item.category === "sunglasses") {
-                        filterData = [...filterData, item];
-                    }
-                });
-            } else {
-                filterData = state.totalProduct
-            }
-
-
-            return { ...state, filter_sortData: filterData }
-        // console.log(tempSortedData);
+            // console.log(filterValue);
+            // return { ...state, filterCategoryValue: filterValue };
 
 
 
-
-
-
+         
+         
 
 
         default:
@@ -252,6 +193,9 @@ export default cartReducer;
 
 
 
+
+//    category
+//    Products.filter(item => item.category == category)
 
 
 

@@ -195,11 +195,18 @@ body {
   justify-content: space-around;
 }
 .loader {
-  /* padding-top: 150px; */
-  /* align-items: center; */
+  padding-top: 200px;
+
+  align-items: center;
+  /* /* height: 50px; */
+  width: 100px;
   margin: auto;
-  /* height: 50px;
-  width: 50px; */
   
   
 }
+
+
+/* loader CSS */
+
+
+
