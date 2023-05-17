@@ -191,31 +191,32 @@ function Home() {
           <div className="sort-filter-background-div">
             <div className="sort-filter">
               <select
-
-                onChange={(e) => { sortPrice(e.target.value) }} name="sort" id="sort" value={cartTotal.state.sortPriceValue}
+                className="select-box"
+                onChange={(e) => { sortPrice(e.target.value) }} name="sort" value={cartTotal.state.sortPriceValue}
               >
                 <option value="default">Default</option>
-                <option disabled></option>
+                {/* <option disabled></option> */}
                 <option value="htl">Price: High to Low</option>
-                <option disabled></option>
+                {/* <option disabled></option> */}
                 <option value="lth">Price: Low to High</option>
               </select>
 
               <select
-                onChange={(e) => { filterCategory(e.target.value) }} name="category" id="category" value={cartTotal.state.filterCategoryValue}
+              className="select-box"
+                onChange={(e) => { filterCategory(e.target.value) }} name="category" value={cartTotal.state.filterCategoryValue}
               >
                 <option value="all">All</option>
-                <option value="#" disabled></option>
+                {/* <option value="#" disabled></option> */}
                 <option value="smartphones">Smartphones</option>
-                <option value="#" disabled></option>
+                {/* <option value="#" disabled></option> */}
                 <option value="laptops">Laptops</option>
-                <option value="#" disabled></option>
+                {/* <option value="#" disabled></option> */}
                 <option value="lighting">Lighting</option>
-                <option value="#" disabled></option>
+                {/* <option value="#" disabled></option> */}
                 <option value="home-decoration">Home-Decoration</option>
-                <option value="#" disabled></option>
+                {/* <option value="#" disabled></option> */}
                 <option value="mens-shoes">Mens-Shoes</option>
-                <option value="#" disabled></option>
+                {/* <option value="#" disabled></option> */}
                 <option value="sunglasses">Sunglasses</option>
               </select>
             </div>

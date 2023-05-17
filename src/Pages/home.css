@@ -28,6 +28,16 @@
     border: 2px solid #619ea2;
     border-radius: 5px;
 }
+.select-box {
+    width: 10px;
+        height: 40px;
+        border: 1px solid #999;
+        font-size: 20px;
+       color: #0A4D68;
+        background-color: #eee;
+        border-radius: 5px;
+        box-shadow: 1px 1px #ccc;
+}
 
 
 

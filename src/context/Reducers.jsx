@@ -127,7 +127,6 @@ const cartReducer = (state, action) => {
 
         case "cart total price":
             const totalPrice = state.basket.reduce((initialVal, item) => {
-                // let price = item;
 
                 initialVal = initialVal + item.price * item.qty;
                 console.log(initialVal);
@@ -136,7 +135,6 @@ const cartReducer = (state, action) => {
             return { ...state, total_price: totalPrice };
 
         case "total product":
-            // return { ...state, basket: [...state.basket, { ...action.payload }] }
             
             return { ...state, totalProduct: [...action.payload] };
 
@@ -156,33 +154,11 @@ const cartReducer = (state, action) => {
 
         case "get sort value":
           
-
-
             return {...state, sortPriceValue: action.payload}
-            // const userSortValue = document.getElementById("sort");
-            // const sortValue =
-            //     userSortValue.options[userSortValue.selectedIndex].value;
-
-            // console.log(sortValue);
-            // return { ...state, sortPriceValue: sortValue };
-
-        
-
+            
         case "get filter category value":
 
         return {...state, filterCategoryValue: action.payload}
-            // const userfilterCategory = document.getElementById("category");
-            // const filterValue =
-            //     userfilterCategory.options[userfilterCategory.selectedIndex].value;
-
-            // console.log(filterValue);
-            // return { ...state, filterCategoryValue: filterValue };
-
-
-
-         
-         
-
 
         default:
             return state;
