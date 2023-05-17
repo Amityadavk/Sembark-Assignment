@@ -35,7 +35,11 @@ function Home() {
           type: "total product",
           payload: data.products,
         });
-        displayProductData([...data.products], cartTotal.state.sortPriceValue, cartTotal.state.filterCategoryValue);
+        displayProductData(
+          [...data.products],
+          cartTotal.state.sortPriceValue,
+          cartTotal.state.filterCategoryValue
+        );
 
         setLoader(false);
         console.log(data.products);
@@ -76,18 +80,19 @@ function Home() {
           payload: [...data.products],
         });
 
-
-        displayProductData([...data.products], cartTotal.state.sortPriceValue, cartTotal.state.filterCategoryValue);
+        displayProductData(
+          [...data.products],
+          cartTotal.state.sortPriceValue,
+          cartTotal.state.filterCategoryValue
+        );
         // console.log(data.products)
 
         setLoader(false);
-
       })
       .catch((err) => {
         console.log(err);
         setLoader(false);
       });
-
   }
 
   useEffect(() => {
@@ -100,27 +105,22 @@ function Home() {
 
   useEffect(() => {
     setCartItem(cartTotal.state.basket.length);
-
   }, [cartTotal]);
-
-
 
   // sort by price
   const sortPrice = (value) => {
     cartTotal.dispatch({
       type: "get sort value",
-      payload: value
+      payload: value,
     });
   };
   // filter category value
   const filterCategory = (value) => {
     cartTotal.dispatch({
       type: "get filter category value",
-      payload: value
-    })
-  }
-
-
+      payload: value,
+    });
+  };
 
   const displayProductData = (product, sort, category) => {
     console.log(product);
@@ -130,30 +130,22 @@ function Home() {
     } else if (category === "all" && sort !== "default") {
       newSortData = [...product];
       if (sort === "htl") {
-        newSortData = newSortData.sort((a, b) =>
-          b.price - a.price
-        );
+        newSortData = newSortData.sort((a, b) => b.price - a.price);
       } else {
-        newSortData = newSortData.sort((a, b) =>
-          a.price - b.price
-        );
+        newSortData = newSortData.sort((a, b) => a.price - b.price);
       }
     } else if (category !== "all" && sort === "default") {
-      let result = product.filter(item => item.category == category)
+      let result = product.filter((item) => item.category == category);
       newSortData = [...result];
     } else {
       if (sort === "lth") {
-        let result = product.filter(item => item.category == category)
+        let result = product.filter((item) => item.category == category);
         newSortData = [...result];
-        newSortData = newSortData.sort((a, b) =>
-          a.price - b.price
-        );
+        newSortData = newSortData.sort((a, b) => a.price - b.price);
       } else {
-        let result = product.filter(item => item.category == category)
+        let result = product.filter((item) => item.category == category);
         newSortData = [...result];
-        newSortData = newSortData.sort((a, b) =>
-          b.price - a.price
-        );
+        newSortData = newSortData.sort((a, b) => b.price - a.price);
       }
     }
 
@@ -161,19 +153,15 @@ function Home() {
       type: "show product",
       payload: newSortData,
     });
-  }
-
-
+  };
 
   useEffect(() => {
-    displayProductData(cartTotal.state.totalProduct, cartTotal.state.sortPriceValue, cartTotal.state.filterCategoryValue);
-  }, [cartTotal.state.sortPriceValue, cartTotal.state.filterCategoryValue])
-
-
-
-
-
-
+    displayProductData(
+      cartTotal.state.totalProduct,
+      cartTotal.state.sortPriceValue,
+      cartTotal.state.filterCategoryValue
+    );
+  }, [cartTotal.state.sortPriceValue, cartTotal.state.filterCategoryValue]);
 
   return (
     <>
@@ -192,31 +180,39 @@ function Home() {
             <div className="sort-filter">
               <select
                 className="select-box"
-                onChange={(e) => { sortPrice(e.target.value) }} name="sort" value={cartTotal.state.sortPriceValue}
+                onChange={(e) => {
+                  sortPrice(e.target.value);
+                }}
+                name="sort"
+                value={cartTotal.state.sortPriceValue}
               >
                 <option value="default">Default</option>
-                {/* <option disabled></option> */}
+
                 <option value="htl">Price: High to Low</option>
-                {/* <option disabled></option> */}
+
                 <option value="lth">Price: Low to High</option>
               </select>
 
               <select
-              className="select-box"
-                onChange={(e) => { filterCategory(e.target.value) }} name="category" value={cartTotal.state.filterCategoryValue}
+                className="select-box"
+                onChange={(e) => {
+                  filterCategory(e.target.value);
+                }}
+                name="category"
+                value={cartTotal.state.filterCategoryValue}
               >
                 <option value="all">All</option>
-                {/* <option value="#" disabled></option> */}
+
                 <option value="smartphones">Smartphones</option>
-                {/* <option value="#" disabled></option> */}
+
                 <option value="laptops">Laptops</option>
-                {/* <option value="#" disabled></option> */}
+
                 <option value="lighting">Lighting</option>
-                {/* <option value="#" disabled></option> */}
+
                 <option value="home-decoration">Home-Decoration</option>
-                {/* <option value="#" disabled></option> */}
+
                 <option value="mens-shoes">Mens-Shoes</option>
-                {/* <option value="#" disabled></option> */}
+
                 <option value="sunglasses">Sunglasses</option>
               </select>
             </div>
@@ -237,7 +233,11 @@ function Home() {
           ))}
         </div>
       )}
-      {loader && <div className="loader"><Loader /></div>}
+      {loader && (
+        <div className="loader">
+          <Loader />
+        </div>
+      )}
       {/* {loader &&  <Spinner className="loader" animation="border" variant="primary" />} */}
       {cartTotal.state.totalProduct.length === 0 && loader === false && (
         <h1>No Data Found {lastSearch} </h1>

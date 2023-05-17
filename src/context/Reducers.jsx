@@ -150,7 +150,7 @@ const cartReducer = (state, action) => {
                 }
             });
             
-            return { ...state, totalProduct: qtyWhenItemRemoved };
+            return { ...state, totalProduct: qtyWhenItemRemoved, filterSortData: qtyWhenItemRemoved };
 
         case "get sort value":
           
