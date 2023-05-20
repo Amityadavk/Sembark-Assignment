@@ -6,6 +6,9 @@ import "./home.css";
 import Navbar from "../Components/Navbar";
 import { Cart } from "../context/Context";
 import { useContext } from "react";
+import SortFilterDropdown from "../Components/SortFilterDropdown";
+
+
 // import Spinner from 'react-bootstrap/Spinner';
 // import { Spinner } from "@chakra-ui/spinner"
 // import { Spinner } from '@chakra-ui/react'
@@ -20,6 +23,35 @@ function Home() {
   // const [filterValue, setFilterValue] = useState("all");
 
   const cartTotal = useContext(Cart);
+  let sortPriceData = [
+    { value: "default", text: "Default" },
+    { value: "htl", text: "Price: High to Low" },
+    { value: "lth", text: "Price: Low to High" }
+  ]
+
+  let filterCategoryData = [
+    { value: "all", text: "All" },
+    { value: "smartphones", text: "Smartphones" },
+    { value: "laptops", text: "Laptops" },
+    { value: "lighting", text: "Lighting" },
+    { value: "home-decoration", text: "Home-Decoration" },
+    { value: "mens-shoes", text: "Mens-Shoes" },
+    { value: "sunglasses", text: "Sunglasses" }
+  ]
+
+  // <option value="all">All</option>
+
+  // <option value="smartphones">Smartphones</option>
+
+  // <option value="">Laptops</option>
+
+  // <option value="lighting">Lighting</option>
+
+  // <option value="home-decoration">Home-Decoration</option>
+
+  // <option value="mens-shoes">Mens-Shoes</option>
+
+  // <option value="sunglasses">Sunglasses</option>
 
   function search(value) {
     console.log(value);
@@ -109,6 +141,7 @@ function Home() {
 
   // sort by price
   const sortPrice = (value) => {
+
     cartTotal.dispatch({
       type: "get sort value",
       payload: value,
@@ -177,45 +210,10 @@ function Home() {
       {!loader && (
         <div className="total-card">
           <div className="sort-filter-background-div">
-            <div className="sort-filter">
-              <select
-                className="select-box"
-                onChange={(e) => {
-                  sortPrice(e.target.value);
-                }}
-                name="sort"
-                value={cartTotal.state.sortPriceValue}
-              >
-                <option value="default">Default</option>
 
-                <option value="htl">Price: High to Low</option>
+            <SortFilterDropdown selectFunction={sortPrice} value={cartTotal.state.sortPriceValue} data={sortPriceData} />
+            <SortFilterDropdown selectFunction={filterCategory} value={cartTotal.state.filterCategoryValue} data={filterCategoryData} />
 
-                <option value="lth">Price: Low to High</option>
-              </select>
-
-              <select
-                className="select-box"
-                onChange={(e) => {
-                  filterCategory(e.target.value);
-                }}
-                name="category"
-                value={cartTotal.state.filterCategoryValue}
-              >
-                <option value="all">All</option>
-
-                <option value="smartphones">Smartphones</option>
-
-                <option value="laptops">Laptops</option>
-
-                <option value="lighting">Lighting</option>
-
-                <option value="home-decoration">Home-Decoration</option>
-
-                <option value="mens-shoes">Mens-Shoes</option>
-
-                <option value="sunglasses">Sunglasses</option>
-              </select>
-            </div>
           </div>
           {cartTotal.state.filterSortData.map((item, index) => (
             <Products
