@@ -17,6 +17,6 @@ const SortFilterDropdown = ({ selectFunction, value, data }) => {
                 </select>
             </div>
         </>
-    );
+    ); 
 }
 export default SortFilterDropdown;

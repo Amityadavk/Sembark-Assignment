@@ -25,7 +25,7 @@ const initialState = {
     //     title: "",
     //     category: "",
     //     price: ""
-    // }]
+    // }] 
 };
 
 // const basketlength = initialState.basket.length;

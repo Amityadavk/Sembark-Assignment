@@ -76,7 +76,7 @@ function Products({ image, category, price, rating, title, description, id,stock
     cartValue.dispatch({
       type: "decrease qty",
       payload: {
-        id: id,
+        id: id, 
     }
 })
 console.log("decrease", qty)

@@ -92,7 +92,7 @@ const Basket = () => {
         <h5 style={{ width: "80px" }}>Remove</h5>
       </div>
       {addToCartData.state.basket.map((item, index) => (
-        <div key={index} className="cart-card">
+        <div key={index} className="cart-card"> 
 
 
 

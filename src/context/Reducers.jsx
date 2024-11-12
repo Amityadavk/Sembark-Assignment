@@ -161,7 +161,7 @@ const cartReducer = (state, action) => {
             return { ...state, filterCategoryValue: action.payload }
 
         default:
-            return state;
+            return state; 
     }
 };
 export default cartReducer;

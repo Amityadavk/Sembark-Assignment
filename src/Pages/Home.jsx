@@ -23,7 +23,7 @@ function Home() {
   // const [filterValue, setFilterValue] = useState("all");
 
   const cartTotal = useContext(Cart);
-  let sortPriceData = [
+  let sortPriceData = [ 
     { value: "default", text: "Default" },
     { value: "htl", text: "Price: High to Low" },
     { value: "lth", text: "Price: Low to High" }

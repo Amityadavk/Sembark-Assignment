@@ -29,7 +29,7 @@ function Navbar({ pressEnter, searchinput, setSearchInput, search, cartvalue }) 
                     {/* </Link> */}
 
                 </div>
-            </div>
+            </div> 
         </>
     );
 }
