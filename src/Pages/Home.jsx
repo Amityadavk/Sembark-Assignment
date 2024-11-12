@@ -39,19 +39,6 @@ function Home() {
     { value: "sunglasses", text: "Sunglasses" }
   ]
 
-  // <option value="all">All</option>
-
-  // <option value="smartphones">Smartphones</option>
-
-  // <option value="">Laptops</option>
-
-  // <option value="lighting">Lighting</option>
-
-  // <option value="home-decoration">Home-Decoration</option>
-
-  // <option value="mens-shoes">Mens-Shoes</option>
-
-  // <option value="sunglasses">Sunglasses</option>
 
   function search(value) {
     console.log(value);
@@ -127,21 +114,11 @@ function Home() {
       });
   }
 
-  useEffect(() => {
-    if (cartTotal.state.totalProduct.length === 0) {
-      productApi();
-    }
-  }, []);
 
-  //
 
-  useEffect(() => {
-    setCartItem(cartTotal.state.basket.length);
-  }, [cartTotal]);
 
   // sort by price
   const sortPrice = (value) => {
-
     cartTotal.dispatch({
       type: "get sort value",
       payload: value,
@@ -195,6 +172,16 @@ function Home() {
       cartTotal.state.filterCategoryValue
     );
   }, [cartTotal.state.sortPriceValue, cartTotal.state.filterCategoryValue]);
+
+  useEffect(() => {
+    if (cartTotal.state.totalProduct.length === 0) {
+      productApi();
+    }
+  }, []);
+
+  useEffect(() => {
+    setCartItem(cartTotal.state.basket.length);
+  }, [cartTotal]);
 
   return (
     <>

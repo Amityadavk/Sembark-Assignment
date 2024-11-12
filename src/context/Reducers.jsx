@@ -135,11 +135,11 @@ const cartReducer = (state, action) => {
             return { ...state, total_price: totalPrice };
 
         case "total product":
-            
+
             return { ...state, totalProduct: [...action.payload] };
 
         case "show product":
-            return {...state, filterSortData: [...action.payload]};
+            return { ...state, filterSortData: [...action.payload] };
 
         case "removed item":
             const qtyWhenItemRemoved = state.totalProduct.map((item) => {
@@ -149,16 +149,16 @@ const cartReducer = (state, action) => {
                     return item;
                 }
             });
-            
+
             return { ...state, totalProduct: qtyWhenItemRemoved, filterSortData: qtyWhenItemRemoved };
 
         case "get sort value":
-          
-            return {...state, sortPriceValue: action.payload}
-            
+
+            return { ...state, sortPriceValue: action.payload }
+
         case "get filter category value":
 
-        return {...state, filterCategoryValue: action.payload}
+            return { ...state, filterCategoryValue: action.payload }
 
         default:
             return state;
